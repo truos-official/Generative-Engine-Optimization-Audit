@@ -1,0 +1,25 @@
+# Prompt templates for GEO audit
+
+specificity:
+  question: "What makes a good {product_type} for {application}?"
+  description: "Tests if agent can provide specific product guidance"
+
+entity_understanding:
+  question: "I need {product_type} with {requirements}. What are my options?"
+  description: "Tests product discovery with unbranded queries"
+
+workflow_understanding:
+  question: "I'm planning to use {product_type} for {application}. What should I know?"
+  description: "Tests workflow guidance"
+
+evidence_trust:
+  question: "What are the key factors when choosing {product_type} for {application}?"
+  description: "Tests evidence-based recommendations"
+
+comparison:
+  question: "Compare options for {product_type} with {requirements}."
+  description: "Tests product comparison capabilities"
+
+commercial:
+  question: "Where can I buy {product_type} for {application}?"
+  description: "Tests commercial intent and citation"
