@@ -95,7 +95,9 @@ async def main():
             context = await run_audit(url, config, args.output_dir)
             print(f"  [OK] Complete - Score: {context.overall_score}, Risk: {context.geo_risk_level}")
         except Exception as e:
+            import traceback
             print(f"  [FAIL] Failed: {e}")
+            traceback.print_exc()
             continue
 
     print(f"\n[OK] Processed {len(urls)} URLs")

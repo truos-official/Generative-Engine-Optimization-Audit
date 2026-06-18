@@ -58,14 +58,14 @@ async def run_stage4(context: AuditContext, config: dict) -> AuditContext:
             models = [m for m in models if m.get("tier") == "flagship"]
 
         # Test each model
-        for model_dict in models[:1]:  # Limit to 1 model per agent for now
+        for model_dict in models[:1]:  # Limit to 1 model per agent
             model = ModelConfig(
                 name=model_dict["name"],
                 provider=agent_name,
                 tier=model_dict.get("tier", "flagship")
             )
 
-            # Test each prompt (limit to first 2 for demo)
+            # Test each prompt (limit to first 2)
             for prompt_exec in context.prompts[:2]:
                 # Training mode
                 training_response = None

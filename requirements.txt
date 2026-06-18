@@ -45,3 +45,7 @@ black>=23.11.0
 tqdm>=4.66.0
 colorama>=0.4.6
 click>=8.1.7
+openai
+anthropic
+google-generativeai
+python-dotenv
