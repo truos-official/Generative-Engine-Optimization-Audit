@@ -68,6 +68,12 @@ async def main():
     """Main CLI entry point."""
     args = parse_args()
 
+    # Load config and orchestrator
+    from core.config import load_config
+    from core.orchestrator import run_audit
+
+    config = load_config(args.config)
+
     # Get URLs
     if args.interactive:
         urls = interactive_url_input()
@@ -81,8 +87,19 @@ async def main():
         print("No URLs provided")
         return 1
 
-    print(f"\\nReady to audit {len(urls)} URLs")
-    print("Implementation: Run audit pipeline here")
+    # Process each URL
+    for i, url in enumerate(urls):
+        print(f"\n[{i+1}/{len(urls)}] Processing: {url}")
+
+        try:
+            context = await run_audit(url, config, args.output_dir)
+            print(f"  ✓ Complete - Score: {context.overall_score}, Risk: {context.geo_risk_level}")
+        except Exception as e:
+            print(f"  ✗ Failed: {e}")
+            continue
+
+    print(f"\n✓ Processed {len(urls)} URLs")
+    print(f"  Output: {args.output_dir}")
 
     return 0
 

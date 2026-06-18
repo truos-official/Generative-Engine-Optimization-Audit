@@ -46,6 +46,8 @@ class AgentClient:
             return await self._call_google(model, prompt, mode)
         elif agent == "perplexity":
             return await self._call_perplexity(model, prompt)
+        elif agent == "bing":
+            return await self._call_bing(model, prompt, mode)
         else:
             raise ValueError(f"Unknown agent: {agent}")
 
@@ -104,6 +106,21 @@ class AgentClient:
         return AgentResponse(
             text="Perplexity response",
             mode="live",
+            tool_calls=[],
+            retrieved_urls=[],
+            cost_usd=0.01
+        )
+
+    async def _call_bing(
+        self,
+        model: ModelConfig,
+        prompt: str,
+        mode: Literal["training", "live"]
+    ) -> AgentResponse:
+        """Call Bing API (simplified)."""
+        return AgentResponse(
+            text=f"Bing {mode} response",
+            mode=mode,
             tool_calls=[],
             retrieved_urls=[],
             cost_usd=0.01
